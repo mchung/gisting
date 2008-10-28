@@ -19,19 +19,6 @@ module Gisting
     def receive_data(output_data)
       @result.recv_map_data!(output_data)
     end
-    
-    # def unbind
-    #   puts "unbinding"
-    #   if error?
-    #     puts "An error occurred"
-    #   else 
-    #     puts "Completed successfully"
-    #   end
-    # end
-    # 
-    # def connection_completed
-    #   puts "..connection_completed called"
-    # end
 
     protected
 

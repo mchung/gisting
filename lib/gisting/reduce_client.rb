@@ -13,20 +13,22 @@ module Gisting
     end
 
     def post_init
+      # puts "post init"
       send_task_if_available
     end
 
     def receive_data(output_result)
+      # puts "recv data #{output_result}"
       recv_task(output_result)
       send_task_if_available
     end
 
     protected
 
-
     def send_task_if_available
       next_task = @result.next_available_map_result
       if next_task
+        # pp [@output.filebase, next_task]
         send_data([@output, next_task].to_yaml)
         @result.sent_reduce_data!
       end

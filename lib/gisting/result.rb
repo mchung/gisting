@@ -27,19 +27,18 @@ module Gisting
       @sent_count += 1
       if @sent_count == @spec.map_input_count
         puts "Maps distributed"
-      else
-        puts "More maps to distribute"
+      # else
+      #   puts "More maps to distribute"
       end
     end
 
     def recv_reduce_data!(output_result)
-      puts "asdf"
       @reduce_responses << output_result
-      if @reduce_responses.size == @spec.reduce_output_count
+      if @reduce_responses.size == @spec.map_input_count
         puts "Stopping Reduce phase"
         @spec.stop!
       else
-        puts "Got Reduce result data #{output_result}. #{@spec.reduce_output_count - @reduce_responses.size} remaining."
+        puts "Got Reduce result data #{output_result}. #{@spec.map_input_count - @reduce_responses.size} remaining."
       end
     end
 

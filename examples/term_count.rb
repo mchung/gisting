@@ -5,9 +5,9 @@ require 'gisting'
 
 # TODO: Grab this from ARGV
 def args
-  # args = ["/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/sample.data"]
+  args = ["/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/sample.data"]
   # args = ["/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/sample.data"]
-  args = ["/Users/mchung/Public/datasets/aoldb_dev.txt", "/Users/mchung/Public/datasets/aoldb_dev.txt"]
+  # args = ["/Users/mchung/Public/datasets/aoldb_dev.txt", "/Users/mchung/Public/datasets/aoldb_dev.txt"]
   # args = ["/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/aoldb_dev.txt"]
   args
 end
@@ -26,7 +26,7 @@ if __FILE__ == $0
   end
   output = spec.output
   output.filebase = "/Users/mchung/Public/datasets/output"
-  output.num_tasks = 2
+  output.num_tasks = 1
   output.reduce do |reduce_input|
     count = 0
     reduce_input.each do |value|

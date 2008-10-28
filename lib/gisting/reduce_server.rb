@@ -16,7 +16,7 @@ module Gisting
         output, input = YAML::load(output_data)
         runner = ReduceRunner.new(output, input)
         runner.reduce!
-        pp runner.output
+        # pp ["output", runner.output]
         send_data(runner.output)
         # rescue  => e
         #   e.backtrace.each do |x|

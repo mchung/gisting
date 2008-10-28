@@ -3,7 +3,6 @@ module Gisting
   class MapRunner
 
     attr_accessor :data_source, :map_proc
-    attr_reader :output
 
     def initialize(input)
       pp input
