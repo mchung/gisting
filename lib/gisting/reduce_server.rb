@@ -9,22 +9,18 @@ module Gisting
 
     # Delegates an +map output+ task to a ReduceRunner and returns 
     # (via +send_data+) the name of the intermediate file
-    def receive_data(output_data)
-      proc = Proc.new do 
+    def receive_data(job)
+      begin
         puts "Running ReduceRunner"
-        # begin
-        output, input = YAML::load(output_data)
-        runner = ReduceRunner.new(output, input)
-        runner.reduce!
-        # pp ["output", runner.output]
-        send_data(runner.output)
-        # rescue  => e
-        #   e.backtrace.each do |x|
-        #     puts x
-        #   end
-        # end
+        intermediate_file, proc, output = YAML.load(job)
+        runner = ReduceRunner.new(intermediate_file, proc, output)
+
+        thread = Proc.new { runner.reduce! }
+        callback = Proc.new { send_data(runner.output) }
+        EM.defer(thread, callback)
+      rescue => e
+        pp [:red_server, e]
       end
-      EM.defer(proc)
     end
 
   end

@@ -1,46 +1,28 @@
-# A ReduceClient sends Output tasks to ReduceServers
-
 module Gisting
 
   module ReduceClient
 
-    def initialize(*args)
-      super
-      puts "Running Reduce Client"
-      @output = args[0]
-      @result = args[1]
-      raise Error if bad_job?
+    def initialize(job)
+      super # Required by EventMachine
+      @job = job
     end
 
     def post_init
-      # puts "post init"
-      send_task_if_available
+      @output, @proc = @job.next_reduce_job
+      send_next_intermediate_job
     end
 
     def receive_data(output_result)
-      # puts "recv data #{output_result}"
-      recv_task(output_result)
-      send_task_if_available
+      @job.reduce_client_recv!(@file_pattern, output_result)
+      send_next_intermediate_job
     end
 
-    protected
-
-    def send_task_if_available
-      next_task = @result.next_available_map_result
-      if next_task
-        # pp [@output.filebase, next_task]
-        send_data([@output, next_task].to_yaml)
-        @result.sent_reduce_data!
+    def send_next_intermediate_job
+      @file_pattern, intermediate_job = @job.next_intermediate_job
+      if @file_pattern && intermediate_job
+        send_data([intermediate_job, @proc, @output].to_yaml)
+        @job.reduce_client_sent!(@file_pattern)
       end
-    end
-
-    def recv_task(output_result)
-      @result.recv_reduce_data!(output_result)
-    end
-
-    # TODO ReduceClient#bad_job? detects badly created output tasks
-    def bad_job?
-      false
     end
 
   end

@@ -1,30 +1,25 @@
-# A MapClient sends an Input to a MapServer
-
 module Gisting
-
   module MapClient
 
-    def initialize(*args)
-      super
-      @input = args[0]
-      @result = args[1]
-      raise Error if bad_job?
+    def initialize(job)
+      super # Required by EventMachine
+      @job = job
     end
 
     def post_init
-      send_data(@input.to_yaml)
-      @result.sent_map_data!
+      send_map_job
     end
 
-    def receive_data(output_data)
-      @result.recv_map_data!(output_data)
+    def receive_data(intermediate_job)
+      @job.map_client_recv!(@file_pattern, intermediate_job)
     end
 
-    protected
-
-    # TODO MapClient#bad_job? detects badly created input tasks
-    def bad_job?
-      false
+    def send_map_job
+      @file_pattern, proc = @job.next_map_job
+      if @file_pattern && proc
+        send_data([@file_pattern, proc].to_yaml)
+        @job.map_client_sent!(@file_pattern)
+      end
     end
 
   end

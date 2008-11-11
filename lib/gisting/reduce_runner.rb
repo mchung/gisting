@@ -3,12 +3,13 @@ module Gisting
 
     attr_accessor :map_data_input, :red_proc
 
-    def initialize(output, input)
+    def initialize(intermediate_file, proc, output)
       @histogram = {}
-      @red_proc = output.reduce_proc
-      @output_file = output.filebase
-      @map_data_input = input
+      @red_proc = proc
+      @output_file = output
+      @map_data_input = intermediate_file
       setup_emit
+      pp ["red_proc", @red_proc]
     end
 
     def Emit(count)

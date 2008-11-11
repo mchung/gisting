@@ -1,6 +1,6 @@
-# Emits output to a file
-
 module Gisting
+
+  # Emits output to a file
   class FileEmit
 
     def initialize(file_output)

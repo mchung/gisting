@@ -1,13 +1,13 @@
-# The runner emits the results of the proc applies to each item in the data source.
 module Gisting
+  
+  # The runner emits the results of the proc applies to each item in the data source.
   class MapRunner
 
     attr_accessor :data_source, :map_proc
 
-    def initialize(input)
-      pp input
-      @data_source = input.file_pattern
-      @map_proc = input.map_proc
+    def initialize(file_pattern, proc)
+      @data_source = file_pattern
+      @map_proc = proc
       setup_emit
     end
 

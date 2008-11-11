@@ -1,4 +1,4 @@
-# A MapWorker processes map input tasks
+# A MapServer processes map input tasks
 
 module Gisting
   module MapServer
@@ -7,17 +7,18 @@ module Gisting
       puts "MapServer Starting..."
     end
 
-    # Delegates a +map input+ task to a MapRunner and returns 
-    # (via +send_data+) the name of the intermediate file
-    def receive_data(input_data)
-      proc = Proc.new do 
+    def receive_data(job)
+      begin
         puts "Running MapRunner"
-        input = YAML::load(input_data)
-        runner = MapRunner.new(input)
-        runner.map!
-        send_data(runner.output)
+        file_pattern, proc = YAML.load(job)
+        runner = MapRunner.new(file_pattern, proc)
+
+        thread = Proc.new { runner.map! }
+        callback = Proc.new { send_data(runner.output) }
+        EM.defer(thread, callback)
+      rescue => e
+        pp [:map_server, e]
       end
-      EM.defer(proc)
     end
 
   end

@@ -2,14 +2,14 @@ lib_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
 $LOAD_PATH.unshift lib_path unless $LOAD_PATH.include?(lib_path)
 
 require 'gisting'
+include Gisting::MapReduce
 
 # TODO: Grab this from ARGV
 def args
-  args = ["/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/sample.data"]
-  # args = ["/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/sample.data"]
-  # args = ["/Users/mchung/Public/datasets/aoldb_dev.txt", "/Users/mchung/Public/datasets/aoldb_dev.txt"]
-  # args = ["/Users/mchung/Public/datasets/sample.data", "/Users/mchung/Public/datasets/aoldb_dev.txt"]
-  args
+  args = []
+  # args = ["/Users/mchung/Public/datasets/aoldb_dev-aa", "/Users/mchung/Public/datasets/aoldb_dev-ab"]
+  args += ["/Users/mchung/Public/datasets/sample1.data", "/Users/mchung/Public/datasets/sample2.data"]
+  # args += ["/Users/mchung/Public/datasets/aoldb_dev.txt"]
 end
 
 if __FILE__ == $0
@@ -26,7 +26,7 @@ if __FILE__ == $0
   end
   output = spec.output
   output.filebase = "/Users/mchung/Public/datasets/output"
-  output.num_tasks = 1
+  output.num_tasks = 2
   output.reduce do |reduce_input|
     count = 0
     reduce_input.each do |value|
@@ -35,10 +35,6 @@ if __FILE__ == $0
     Emit(count)
   end
 
-  # TODO Shouldn't need to pass the spec into the result
-  result = Gisting::Result.new(spec)
-  # TODO This is so the spec knows where to find the map and reduce servers
-  # spec.setup_wth_paths_to_servers
-  spec.run_map!(result)
-  spec.run_reduce!(result)
+  result = MapReduce(spec)
+  pp result
 end

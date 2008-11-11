@@ -9,6 +9,8 @@ SERVERS = [
   ["127.0.0.1", 9081, Gisting::MapServer],
   ["127.0.0.1", 9082, Gisting::MapServer],
   ["127.0.0.1", 9083, Gisting::MapServer],
+  ["127.0.0.1", 9084, Gisting::MapServer],
+  ["127.0.0.1", 9085, Gisting::MapServer],
 
   ["127.0.0.1", 9091, Gisting::ReduceServer],
   ["127.0.0.1", 9092, Gisting::ReduceServer]
