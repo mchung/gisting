@@ -7,8 +7,14 @@ include Gisting::MapReduce
 # TODO: Grab this from ARGV
 def args
   args = []
-  # args = ["/Users/mchung/Public/datasets/aoldb_dev-aa", "/Users/mchung/Public/datasets/aoldb_dev-ab"]
-  args += ["/Users/mchung/Public/datasets/sample1.data", "/Users/mchung/Public/datasets/sample2.data"]
+  args += [
+           "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-01.txt", 
+           "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-02.txt",
+           "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-03.txt",
+           "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-04.txt",
+           "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-05.txt",
+           ]
+  # args += ["/Users/mchung/Public/datasets/sample1.data", "/Users/mchung/Public/datasets/sample2.data"]
   # args += ["/Users/mchung/Public/datasets/aoldb_dev.txt"]
 end
 
@@ -25,7 +31,7 @@ if __FILE__ == $0
     end
   end
   output = spec.output
-  output.filebase = "/Users/mchung/Public/datasets/output"
+  output.filebase = "/Volumes/gisting/datasets/output"
   output.num_tasks = 2
   output.reduce do |reduce_input|
     count = 0

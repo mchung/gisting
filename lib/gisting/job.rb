@@ -14,7 +14,7 @@ module Gisting
     def map_client_sent!(file_pattern)
       @lock.synchronize do
         @job_progress.start_map_job(file_pattern)
-        puts "MapServer done with #{file_pattern}"
+        puts "MapServer processing #{file_pattern}"
         puts "All Map Jobs Distributed" if @job_progress.all_map_jobs_in_progress?
       end
     end
@@ -49,7 +49,7 @@ module Gisting
     def reduce_client_sent!(file_pattern)
       @lock.synchronize do
         @job_progress.start_reduce_job(file_pattern)
-        puts "ReduceServer done with #{file_pattern}"
+        puts "ReduceServer processing #{file_pattern}"
         puts "All Reduce Jobs Distributed" if @job_progress.all_reduce_jobs_in_progress?
       end
     end
