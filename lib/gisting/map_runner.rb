@@ -9,6 +9,7 @@ module Gisting
       @data_source = file_pattern
       @map_proc = proc
       setup_emit
+      pp ["map_runner", @data_source, @map_proc]
     end
 
     def Emit(key, value)

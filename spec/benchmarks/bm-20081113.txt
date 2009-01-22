@@ -1,0 +1,77 @@
+# 7 separate Ruby processes: 5M, 2R
+
+All Reduce Jobs Distributed
+#<Gisting::Result:0x1221c70
+ @job=
+  #<Gisting::Job:0x1227828
+   @job_progress=
+    #<Gisting::JobProgress:0x1227814
+     @jobs_map_completed=5,
+     @jobs_map_started=5,
+     @jobs_reduce_completed=5,
+     @jobs_reduce_started=5,
+     @map_jobs=
+      {"/Volumes/gisting/datasets/aol-data/user-ct-test-collection-02.txt"=>
+        {:output_base=>"/Volumes/gisting/datasets/output_1",
+         :started_at=>Thu Nov 13 00:59:48 -0700 2008,
+         :proc=>
+          "proc { |map_input|\n  words = map_input.strip.split(\"\\t\")\n  Emit(words[1], \"1\")\n}",
+         :ended_at=>Thu Nov 13 01:07:13 -0700 2008,
+         :intermediate_job=>
+          "/Volumes/gisting/datasets/aol-data/results/user-ct-test-collection-02.55.txt",
+         :reduce_started_at=>Thu Nov 13 01:07:24 -0700 2008,
+         :reduce_ended_at=>Thu Nov 13 01:11:32 -0700 2008},
+       "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-05.txt"=>
+        {:output_base=>"/Volumes/gisting/datasets/output_2",
+         :started_at=>Thu Nov 13 00:59:48 -0700 2008,
+         :proc=>
+          "proc { |map_input|\n  words = map_input.strip.split(\"\\t\")\n  Emit(words[1], \"1\")\n}",
+         :ended_at=>Thu Nov 13 01:07:24 -0700 2008,
+         :intermediate_job=>
+          "/Volumes/gisting/datasets/aol-data/results/user-ct-test-collection-05.86.txt",
+         :reduce_started_at=>Thu Nov 13 01:07:24 -0700 2008,
+         :reduce_ended_at=>Thu Nov 13 01:11:46 -0700 2008},
+       "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-03.txt"=>
+        {:output_base=>"/Volumes/gisting/datasets/output_1",
+         :started_at=>Thu Nov 13 00:59:48 -0700 2008,
+         :proc=>
+          "proc { |map_input|\n  words = map_input.strip.split(\"\\t\")\n  Emit(words[1], \"1\")\n}",
+         :ended_at=>Thu Nov 13 01:07:15 -0700 2008,
+         :intermediate_job=>
+          "/Volumes/gisting/datasets/aol-data/results/user-ct-test-collection-03.1.txt",
+         :reduce_started_at=>Thu Nov 13 01:11:32 -0700 2008,
+         :reduce_ended_at=>Thu Nov 13 01:19:57 -0700 2008},
+       "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-04.txt"=>
+        {:output_base=>"/Volumes/gisting/datasets/output_2",
+         :started_at=>Thu Nov 13 00:59:48 -0700 2008,
+         :proc=>
+          "proc { |map_input|\n  words = map_input.strip.split(\"\\t\")\n  Emit(words[1], \"1\")\n}",
+         :ended_at=>Thu Nov 13 01:07:12 -0700 2008,
+         :intermediate_job=>
+          "/Volumes/gisting/datasets/aol-data/results/user-ct-test-collection-04.31.txt",
+         :reduce_started_at=>Thu Nov 13 01:11:46 -0700 2008,
+         :reduce_ended_at=>Thu Nov 13 01:20:17 -0700 2008},
+       "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-01.txt"=>
+        {:output_base=>"/Volumes/gisting/datasets/output_1",
+         :started_at=>Thu Nov 13 00:59:48 -0700 2008,
+         :proc=>
+          "proc { |map_input|\n  words = map_input.strip.split(\"\\t\")\n  Emit(words[1], \"1\")\n}",
+         :ended_at=>Thu Nov 13 01:07:03 -0700 2008,
+         :intermediate_job=>
+          "/Volumes/gisting/datasets/aol-data/results/user-ct-test-collection-01.43.txt",
+         :reduce_started_at=>Thu Nov 13 01:19:57 -0700 2008,
+         :reduce_ended_at=>Thu Nov 13 01:33:47 -0700 2008}},
+     @next_intermediate_job=5,
+     @next_map_job=5,
+     @next_reduce_job=2,
+     @red_jobs=
+      {"/Volumes/gisting/datasets/output_1"=>
+        "proc { |reduce_input|\n  count = 0\n  reduce_input.each { |value| count = (count + value.to_i) }\n  Emit(count)\n}",
+       "/Volumes/gisting/datasets/output_2"=>
+        "proc { |reduce_input|\n  count = 0\n  reduce_input.each { |value| count = (count + value.to_i) }\n  Emit(count)\n}"}>,
+   @lock=#<Mutex:0x122779c>>>
+
+real	33m59.568s
+user	0m0.553s
+sys	0m0.595s
+

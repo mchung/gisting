@@ -9,7 +9,7 @@ module Gisting
       @output_file = output
       @map_data_input = intermediate_file
       setup_emit
-      pp ["red_proc", @red_proc]
+      pp ["red_runner", @map_data_input, @red_proc, @output_file]
     end
 
     def Emit(count)

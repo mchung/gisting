@@ -13,6 +13,10 @@ module Gisting
       Result.new(job)
     rescue BusyClusterFail => e
       puts e.message
+    rescue Exception => e
+      puts "Caught exception..."
+      puts e.message
+      # job.stop!
     end
 
     alias :MapReduce :map_reduce

@@ -65,7 +65,7 @@ module Gisting
 
     # This smells funny
     def stop!
-      # Stop all client connections and ends the reactor in Cluster
+      # Instructs the Cluster to stop all client connections and end the Map/Reduce reactor
       EM::stop_event_loop
     end
 

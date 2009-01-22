@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+lib_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
+$LOAD_PATH.unshift lib_path unless $LOAD_PATH.include?(lib_path)
+
+require 'gisting'
+
+SERVERS = [
+  ["127.0.0.1", 9081, Gisting::MapServer],
+  ["127.0.0.1", 9082, Gisting::MapServer],
+  ["127.0.0.1", 9083, Gisting::MapServer],
+  ["127.0.0.1", 9084, Gisting::MapServer],
+  ["127.0.0.1", 9085, Gisting::MapServer],
+
+  ["127.0.0.1", 9091, Gisting::ReduceServer],
+  ["127.0.0.1", 9092, Gisting::ReduceServer]
+]
+
+def start_servers(servers)
+  EM::run {
+    servers.each do |server_conf|
+      host, port, gistable = server_conf
+      puts "Starting server #{gistable.to_s} on #{host}:#{port}"
+      EM::start_server host, port, gistable
+    end
+  }  
+end
+
+start_servers(SERVERS)

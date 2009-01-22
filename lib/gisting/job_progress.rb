@@ -11,7 +11,7 @@ module Gisting
       @jobs_map_completed = 0
       @jobs_reduce_started = 0
       @jobs_reduce_completed = 0
-      @next_map_job, @next_intermediate_job, @next_reduce_job = 0, 0, 0 # Counter
+      @next_map_job, @next_intermediate_job, @next_reduce_job = 0, 0, 0 # Counters
     end
 
     def init_map_job(input)
@@ -23,12 +23,12 @@ module Gisting
     end
 
     def start_map_job(file_pattern)
-      @map_jobs[file_pattern][:started_at] = Time.now
+      @map_jobs[file_pattern][:map_started_at] = Time.now
       @jobs_map_started +=1 
     end
 
     def stop_map_job(file_pattern, intermediate_job)
-      @map_jobs[file_pattern][:ended_at] = Time.now
+      @map_jobs[file_pattern][:map_ended_at] = Time.now
       @map_jobs[file_pattern][:intermediate_job] = intermediate_job
       @jobs_map_completed += 1
     end

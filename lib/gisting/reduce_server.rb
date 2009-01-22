@@ -7,8 +7,7 @@ module Gisting
       puts "ReduceServer Starting..."
     end
 
-    # Delegates an +map output+ task to a ReduceRunner and returns 
-    # (via +send_data+) the name of the intermediate file
+    # Executes a ReduceRunner with an intermediate file
     def receive_data(job)
       begin
         puts "Running ReduceRunner"
@@ -16,11 +15,16 @@ module Gisting
         runner = ReduceRunner.new(intermediate_file, proc, output)
 
         thread = Proc.new { runner.reduce! }
-        callback = Proc.new { send_data(runner.output) }
+        callback = Proc.new { send_reply(runner.output) }
         EM.defer(thread, callback)
       rescue => e
         pp [:red_server, e]
       end
+    end
+    
+    def send_reply(output)
+      send_data(output)
+      puts "Completed ReduceRunner"
     end
 
   end
