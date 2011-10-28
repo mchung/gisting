@@ -1,5 +1,5 @@
 module Gisting
-  
+
   # An Output is the path to the output file, the number of reduce tasks to
   # run (the number of files in the format: filebase_1, filebase_2, etc) and
   # the Reduce proc.

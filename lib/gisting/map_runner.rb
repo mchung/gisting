@@ -1,5 +1,5 @@
 module Gisting
-  
+
   # The runner emits the results of the proc applies to each item in the data source.
   class MapRunner
 
@@ -42,7 +42,7 @@ module Gisting
       @output = File.new(@intermediate_output, "w")
       @emit = FileEmit.new(@output)
     end
-    
+
     def make_intermediate_output
       # TODO Abstract away file data source
       basedir = File.dirname(@data_source)
@@ -51,7 +51,7 @@ module Gisting
       filename_no_ext = File.basename(filename, old_ext)
       new_ext = rand(100).to_s
       intermediate_filename = "#{filename_no_ext}.#{new_ext}#{old_ext}"
-      
+
       File.join(basedir, "results", intermediate_filename)
     end
 

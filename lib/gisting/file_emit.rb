@@ -22,7 +22,7 @@ module Gisting
       if @buffer > 2048
         @output.flush
         @buffer = 0
-      end      
+      end
     end
 
   end

@@ -1,5 +1,5 @@
 class Object
-  
+
   # A Ruby-ized realization of the K combinator, courtesy of Mikael Brockman.
   #
   #   def foo
@@ -24,5 +24,5 @@ class Object
     yield(value)
     value
   end
-    
+
 end

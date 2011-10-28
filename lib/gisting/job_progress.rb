@@ -1,5 +1,5 @@
 module Gisting
-  
+
   # A JobProgress keeps track of a running Gisting instance
   class JobProgress
 
@@ -24,7 +24,7 @@ module Gisting
 
     def start_map_job(file_pattern)
       @map_jobs[file_pattern][:map_started_at] = Time.now
-      @jobs_map_started +=1 
+      @jobs_map_started +=1
     end
 
     def stop_map_job(file_pattern, intermediate_job)
@@ -37,7 +37,7 @@ module Gisting
       @map_jobs[file_pattern][:reduce_started_at] = Time.now
       @jobs_reduce_started += 1
     end
-    
+
     def stop_reduce_job(file_pattern, output_result)
       @map_jobs[file_pattern][:reduce_ended_at] = Time.now
       @map_jobs[file_pattern][:output_base] = output_result
@@ -57,7 +57,7 @@ module Gisting
         return file_pattern, proc
       end
     end
-    
+
     # Returns the file_pattern and the intermediate output
     def next_intermediate_job
       if @next_intermediate_job < @map_jobs.to_a.size
@@ -68,7 +68,7 @@ module Gisting
         return file_pattern, intermediate_job
       end
     end
-    
+
     # Returns the output_result and the Reduce proc
     def next_reduce_job
       if @next_reduce_job < @red_jobs.to_a.size
@@ -79,7 +79,7 @@ module Gisting
         return output_result, proc
       end
     end
-    
+
     def all_map_jobs_in_progress?
       @jobs_map_started == @map_jobs.size
     end
@@ -91,15 +91,15 @@ module Gisting
     def remaining_map_jobs
       @jobs_map_started - @jobs_map_completed
     end
-    
+
     def all_reduce_jobs_in_progress?
       @jobs_reduce_started == @map_jobs.size
     end
-    
+
     def all_reduce_jobs_completed?
       @jobs_reduce_completed == @map_jobs.size
     end
-    
+
     def remaining_reduce_jobs
       @jobs_reduce_started - @jobs_reduce_completed
     end

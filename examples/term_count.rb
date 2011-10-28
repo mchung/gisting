@@ -8,20 +8,20 @@ include Gisting::MapReduce
 def args
   args = []
   args += [
-           "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-01.txt", 
+           "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-01.txt",
            "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-02.txt",
            "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-03.txt",
            "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-04.txt",
            "/Volumes/gisting/datasets/aol-data/user-ct-test-collection-05.txt",
            ]
   args = [
-           "/Users/mchung/Public/datasets/sample1.data", 
+           "/Users/mchung/Public/datasets/sample1.data",
            "/Users/mchung/Public/datasets/sample2.data"
          ]
-         
+
   args = [
             "/Volumes/gisting/datasets/aoldb_dev-aa",
-            "/Volumes/gisting/datasets/aoldb_dev-ab",            
+            "/Volumes/gisting/datasets/aoldb_dev-ab",
          ]
 end
 

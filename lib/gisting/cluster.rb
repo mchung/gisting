@@ -1,8 +1,8 @@
 module Gisting
-  
+
   # A Cluster manages connections to MapServers and ReduceServers
   class Cluster
-    
+
     #
     def initialize(map_servers, reduce_servers)
       @map_servers = map_servers
@@ -20,7 +20,7 @@ module Gisting
       end
     end
 
-    # 
+    #
     def reduce(job)
       EM::run do
         @red_servers.each_with_index do |machine, idx|
@@ -30,7 +30,7 @@ module Gisting
         end
       end
     end
-    
+
   end
 
 end
