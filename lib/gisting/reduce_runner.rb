@@ -32,13 +32,13 @@ module Gisting
         e.backtrace.each {|x| puts x}
       end
     end
-    
+
     def output
       @output_file
     end
-    
+
     protected
-    
+
     def apply(data_item)
       @proc ||= eval(@red_proc)
       @proc.call(data_item)

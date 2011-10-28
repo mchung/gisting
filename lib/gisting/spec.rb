@@ -1,5 +1,5 @@
 module Gisting
-  
+
   # A Spec contains multiple Inputs and a single Output
   class Spec
 
@@ -12,7 +12,7 @@ module Gisting
       @map_inputs << input
       input
     end
-    
+
     def map_inputs
       @map_inputs
     end

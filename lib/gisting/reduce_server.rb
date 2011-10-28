@@ -21,7 +21,7 @@ module Gisting
         pp [:red_server, e]
       end
     end
-    
+
     def send_reply(output)
       send_data(output)
       puts "Completed ReduceRunner"
